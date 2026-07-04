@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>United India Youth Foundation — Seva Before Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F1E4;
+    --paper-deep:#EFE6D2;
+    --ink:#20291F;
+    --saffron:#E07A2C;
+    --teal:#1F6E5C;
+    --signal:#C63A2E;
+    --gold:#B98C3D;
+    --line: rgba(32,41,31,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--saffron);color:var(--paper);}
+
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:0.72rem;
+    color:var(--teal);
+    font-weight:500;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  /* texture */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(32,41,31,0.05) 1px, transparent 0);
+    background-size:22px 22px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,241,228,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1180px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;
+    background:conic-gradient(var(--saffron) 0 33%, var(--paper) 33% 66%, var(--teal) 66% 100%);
+    border:1px solid var(--ink);
+    position:relative;
+  }
+  .brand .mark::after{
+    content:"";position:absolute;inset:38%;
+    background:var(--ink);border-radius:50%;
+  }
+  nav ul{display:flex;gap:30px;list-style:none;font-size:0.92rem;font-weight:600;}
+  nav ul a{text-decoration:none;position:relative;padding-bottom:3px;}
+  nav ul a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--signal);
+    transition:width .25s ease;
+  }
+  nav ul a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--ink);color:var(--paper);
+    padding:10px 20px;border-radius:100px;
+    font-weight:700;font-size:0.88rem;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .nav-cta:hover{background:var(--signal);transform:translateY(-1px);}
+  .navlinks-mobile{display:none;}
+
+  /* HERO */
+  .hero{
+    padding:110px 0 90px;
+    position:relative;
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);
+    padding:6px 14px;border-radius:100px;
+    margin-bottom:26px;
+  }
+  .hero-tag span.dot{width:7px;height:7px;border-radius:50%;background:var(--signal);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.3rem);
+    line-height:1.03;
+    margin-bottom:26px;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--saffron);
+  }
+  .hero p.lede{
+    font-size:1.15rem;line-height:1.6;color:#41493d;
+    max-width:46ch;margin-bottom:36px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--signal);color:var(--paper);
+    padding:15px 28px;border-radius:100px;
+    font-weight:700;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    box-shadow:0 6px 0 #8f2a20;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 0 #8f2a20;}
+  .btn-primary:active{transform:translateY(2px);box-shadow:0 3px 0 #8f2a20;}
+  .btn-ghost{
+    border:1.5px solid var(--ink);
+    padding:14px 26px;border-radius:100px;
+    font-weight:700;text-decoration:none;
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);}
+
+  /* Hero signature: challan -> change flip card */
+  .flip-stage{
+    perspective:1400px;
+    height:420px;
+  }
+  .flip-card{
+    width:100%;height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:autoflip 7s ease-in-out infinite;
+    cursor:pointer;
+  }
+  @keyframes autoflip{
+    0%, 42%{transform:rotateY(0deg);}
+    50%, 92%{transform:rotateY(180deg);}
+    100%{transform:rotateY(360deg);}
+  }
+  .flip-face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:18px;
+    padding:30px;
+    display:flex;flex-direction:column;
+    border:1.5px solid var(--ink);
+  }
+  .flip-front{
+    background:repeating-linear-gradient(135deg, #f2e2c6, #f2e2c6 10px, #ece0c2 10px, #ece0c2 20px);
+    box-shadow:0 18px 40px -12px rgba(32,41,31,0.25);
+  }
+  .flip-front .stamp{
+    align-self:flex-end;
+    border:2px solid var(--signal);color:var(--signal);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;font-weight:700;
+    padding:4px 10px;border-radius:6px;
+    transform:rotate(8deg);
+    letter-spacing:0.06em;
+  }
+  .flip-front .doc-title{font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;color:var(--ink);opacity:0.6;margin-top:18px;}
+  .flip-front h3{font-size:1.6rem;margin-top:6px;}
+  .flip-front .line{height:1px;background:var(--line);margin:18px 0;}
+  .flip-front .row{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.82rem;margin-bottom:10px;color:#5a5142;}
+  .flip-front .fine{margin-top:auto;font-size:0.75rem;color:#8a5a2f;font-weight:600;}
+
+  .flip-back{
+    background:var(--teal);color:var(--paper);
+    transform:rotateY(180deg);
+    box-shadow:0 18px 40px -12px rgba(31,110,92,0.4);
+    justify-content:space-between;
+  }
+  .flip-back .doc-title{font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;opacity:0.75;}
+  .flip-back h3{font-size:1.7rem;margin-top:6px;color:#fff;}
+  .flip-back .items{margin-top:18px;display:flex;flex-direction:column;gap:12px;}
+  .flip-back .item{display:flex;gap:10px;align-items:flex-start;font-size:0.95rem;}
+  .flip-back .item .ico{width:20px;height:20px;border-radius:50%;background:var(--saffron);flex-shrink:0;margin-top:2px;}
+  .flip-back .fine{font-size:0.8rem;opacity:0.85;font-style:italic;font-family:'Fraunces',serif;}
+  .flip-hint{
+    text-align:center;margin-top:14px;font-size:0.78rem;color:#6c6252;
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  /* SECTION shared */
+  section{padding:100px 0;position:relative;}
+  .section-head{max-width:640px;margin-bottom:60px;}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:12px;line-height:1.12;}
+  .section-head p{color:#4a5142;font-size:1.05rem;margin-top:16px;line-height:1.6;}
+
+  /* MISSIONS */
+  .missions{background:var(--paper-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .mission-list{display:flex;flex-direction:column;}
+  .mission-item{
+    display:grid;grid-template-columns:120px 1fr 40px;
+    align-items:center;
+    gap:28px;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+    transition:padding-left .3s ease, background .3s ease;
+    cursor:default;
+  }
+  .mission-item:last-child{border-bottom:1px solid var(--line);}
+  .mission-item:hover{padding-left:16px;background:rgba(224,122,44,0.06);}
+  .mission-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.85rem;color:var(--teal);
+    display:flex;align-items:center;gap:10px;
+  }
+  .mission-num .glyph{
+    width:44px;height:44px;border-radius:50%;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;
+  }
+  .mission-body h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;margin-bottom:6px;}
+  .mission-body p{color:#4a5142;font-size:0.98rem;line-height:1.5;max-width:56ch;}
+  .mission-arrow{font-size:1.4rem;color:var(--line);text-align:right;transition:transform .3s ease,color .3s ease;}
+  .mission-item:hover .mission-arrow{transform:translateX(6px);color:var(--signal);}
+  .mission-item.signature{
+    background:linear-gradient(90deg, rgba(198,58,46,0.07), transparent);
+  }
+  .mission-item.signature .mission-num .glyph{border-color:var(--signal);background:var(--signal);color:#fff;}
+  .mission-item.signature h3{color:var(--signal);}
+
+  /* ROAD SAFETY SPOTLIGHT */
+  .spotlight{background:var(--ink);color:var(--paper);}
+  .spotlight .eyebrow{color:var(--saffron);}
+  .spotlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .spotlight h2{color:#fff;}
+  .spotlight p{color:#cfd3c8;line-height:1.65;font-size:1.02rem;margin-top:18px;}
+  .compare{
+    display:flex;flex-direction:column;gap:2px;
+    border-radius:16px;overflow:hidden;
+    border:1px solid rgba(255,255,255,0.14);
+  }
+  .compare-row{
+    display:grid;grid-template-columns:1fr 1fr;
+  }
+  .compare-row.header .cell{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
+    padding:16px 20px;font-weight:600;
+  }
+  .compare-row.header .cell.old{background:rgba(198,58,46,0.18);color:#f2a89f;}
+  .compare-row.header .cell.new{background:rgba(31,110,92,0.28);color:#8fd6c1;}
+  .compare-row .cell{
+    padding:18px 20px;font-size:0.94rem;
+    background:rgba(255,255,255,0.03);
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .compare-row .cell.old{color:#e3a89f;}
+  .compare-row .cell.new{color:#a9e4d1;font-weight:500;}
+
+  /* STATS */
+  .stats{border-top:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
+  .stat{background:var(--paper);padding:36px 28px;text-align:center;}
+  .stat .num{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:700;color:var(--saffron);}
+  .stat .label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#5a5142;margin-top:8px;}
+
+  /* JOIN / VOLUNTEER */
+  .join{background:var(--paper-deep);}
+  .join-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
+  .roles{display:flex;flex-direction:column;gap:14px;margin-top:30px;}
+  .role-chip{
+    border:1px solid var(--line);border-radius:12px;
+    padding:16px 20px;background:var(--paper);
+    display:flex;justify-content:space-between;align-items:center;
+    font-weight:600;
+  }
+  .role-chip .tag{
+    font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+    background:var(--teal);color:#fff;padding:4px 10px;border-radius:6px;
+    text-transform:uppercase;letter-spacing:0.05em;
+  }
+
+  form.card{
+    background:var(--paper);border:1.5px solid var(--ink);border-radius:18px;
+    padding:36px;
+    box-shadow:0 16px 40px -18px rgba(32,41,31,0.35);
+  }
+  form.card h3{font-size:1.4rem;margin-bottom:6px;}
+  form.card p.sub{color:#5a5142;font-size:0.92rem;margin-bottom:24px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:0.82rem;font-weight:700;margin-bottom:7px;font-family:'JetBrains Mono',monospace;letter-spacing:0.03em;}
+  .field input, .field select{
+    width:100%;padding:13px 14px;border-radius:9px;
+    border:1.5px solid var(--line);background:#fff;
+    font-family:'Manrope',sans-serif;font-size:0.95rem;
+    outline:none;transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus{border-color:var(--signal);}
+  .submit-btn{
+    width:100%;background:var(--signal);color:#fff;border:none;
+    padding:15px;border-radius:100px;font-weight:700;font-size:1rem;
+    cursor:pointer;box-shadow:0 6px 0 #8f2a20;
+    transition:transform .15s ease;
+    font-family:'Manrope',sans-serif;
+  }
+  .submit-btn:hover{transform:translateY(-2px);}
+  .submit-btn:active{transform:translateY(2px);}
+  .form-note{font-size:0.78rem;color:#6c6252;margin-top:14px;text-align:center;}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:var(--paper);padding:70px 0 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;margin-bottom:50px;}
+  footer h4{font-family:'JetBrains Mono',monospace;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--saffron);margin-bottom:16px;}
+  footer .brand-foot{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;margin-bottom:12px;}
+  footer p.desc{color:#a9ada0;font-size:0.92rem;line-height:1.6;max-width:34ch;}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  footer ul a{text-decoration:none;color:#cfd3c8;font-size:0.92rem;transition:color .2s ease;}
+  footer ul a:hover{color:var(--saffron);}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);
+    padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-size:0.82rem;color:#9a9d90;
+  }
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  @media (max-width:960px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .flip-stage{height:360px;margin-top:20px;}
+    .spotlight-grid{grid-template-columns:1fr;gap:40px;}
+    .join-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+    nav ul{display:none;}
+    .mission-item{grid-template-columns:60px 1fr;}
+    .mission-arrow{display:none;}
+  }
+  @media (max-width:600px){
+    .hero{padding:80px 0 60px;}
+    section{padding:64px 0;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="mark"></span> United India Youth Foundation</div>
+    <ul>
+      <li><a href="#missions">Missions</a></li>
+      <li><a href="#road-safety">Road Safety</a></li>
+      <li><a href="#join">Volunteer</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#join">Join the Movement</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-tag"><span class="dot"></span> <span class="eyebrow">Nagpur · Youth-Led · Est. 2026</span></div>
+      <h1>Seva before self.<br>Action before <em>intention</em>.</h1>
+      <p class="lede">We're young Indians who stopped waiting for change and started delivering it — in classrooms, ration lines, government offices, and at the roadside, one challan at a time.</p>
+      <div class="hero-actions">
+        <a href="#join" class="btn-primary">Become a Volunteer →</a>
+        <a href="#missions" class="btn-ghost">See Our Work</a>
+      </div>
+    </div>
+    <div>
+      <div class="flip-stage">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-face flip-front">
+            <span class="stamp">₹ CHALLAN</span>
+            <span class="doc-title">TRAFFIC VIOLATION NOTICE</span>
+            <h3>No Helmet. No Licence.</h3>
+            <div class="line"></div>
+            <div class="row"><span>Section</span><span>129 MV Act</span></div>
+            <div class="row"><span>Fine Amount</span><span>₹1,000</span></div>
+            <div class="row"><span>Outcome</span><span>Penalty issued</span></div>
+            <p class="fine">This is where the story usually ends.</p>
+          </div>
+          <div class="flip-face flip-back">
+            <div>
+              <span class="doc-title">UIYF ON-SPOT RESPONSE</span>
+              <h3>Helmet. Licence. Dignity.</h3>
+              <div class="items">
+                <div class="item"><span class="ico"></span> Helmet provided at challan cost, on the spot</div>
+                <div class="item"><span class="ico"></span> Instant support applying for a learning licence</div>
+                <div class="item"><span class="ico"></span> A rider who's safer tomorrow, not just poorer today</div>
+              </div>
+            </div>
+            <p class="fine">"We choose safety over penalty."</p>
+          </div>
+        </div>
+      </div>
+      <p class="flip-hint">↻ our signature project, in one card</p>
+    </div>
+  </div>
+</section>
+
+<section class="missions" id="missions">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>Five missions, one belief — help should reach people directly.</h2>
+      <p>No red tape, no waiting for permission. Every mission below is something our volunteers show up and do themselves.</p>
+    </div>
+    <div class="mission-list">
+      <div class="mission-item reveal">
+        <div class="mission-num"><span class="glyph">📘</span></div>
+        <div class="mission-body">
+          <h3>Education Access</h3>
+          <p>Books, school fees and scholarship support so a family's income never decides a child's future.</p>
+        </div>
+        <div class="mission-arrow">→</div>
+      </div>
+      <div class="mission-item reveal">
+        <div class="mission-num"><span class="glyph">🛠️</span></div>
+        <div class="mission-body">
+          <h3>Employment Drive</h3>
+          <p>Skill training and direct job support connecting unemployed youth to real, sustainable work.</p>
+        </div>
+        <div class="mission-arrow">→</div>
+      </div>
+      <div class="mission-item reveal">
+        <div class="mission-num"><span class="glyph">🍚</span></div>
+        <div class="mission-body">
+          <h3>Direct Aid</h3>
+          <p>Food, clothing and medical assistance delivered straight to families in need — no middlemen.</p>
+        </div>
+        <div class="mission-arrow">→</div>
+      </div>
+      <div class="mission-item reveal">
+        <div class="mission-num"><span class="glyph">📋</span></div>
+        <div class="mission-body">
+          <h3>Govt. Scheme Linkage</h3>
+          <p>We help the poor navigate paperwork and access welfare schemes that are rightfully theirs.</p>
+        </div>
+        <div class="mission-arrow">→</div>
+      </div>
+      <div class="mission-item signature reveal">
+        <div class="mission-num"><span class="glyph">🚦</span></div>
+        <div class="mission-body">
+          <h3>Road Safety Initiative — Our Signature Project</h3>
+          <p>No helmet? No licence? Instead of a fine, we offer a fix — a helmet at challan cost and instant learning-licence support, right at the checkpoint.</p>
+        </div>
+        <div class="mission-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="spotlight" id="road-safety">
+  <div class="wrap">
+    <div class="spotlight-grid">
+      <div class="reveal">
+        <span class="eyebrow">The signature project</span>
+        <h2>From punishment<br>to prevention.</h2>
+        <p>Most riders stopped without a helmet or licence walk away with a fine and no safer than before. We partner with local authorities to offer something better at the point of check: the safety gear and the paperwork help they actually needed.</p>
+        <p>It costs the same as the challan. It changes what happens next.</p>
+      </div>
+      <div class="reveal">
+        <div class="compare">
+          <div class="compare-row header">
+            <div class="cell old">The old way</div>
+            <div class="cell new">The UIYF way</div>
+          </div>
+          <div class="compare-row">
+            <div class="cell old">₹1,000 fine, no helmet</div>
+            <div class="cell new">Helmet provided at challan cost</div>
+          </div>
+          <div class="compare-row">
+            <div class="cell old">No path to a licence</div>
+            <div class="cell new">On-spot learning licence support</div>
+          </div>
+          <div class="compare-row">
+            <div class="cell old">Rider still unsafe tomorrow</div>
+            <div class="cell new">Rider protected from today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid reveal">
+      <div class="stat"><div class="num">5</div><div class="label">Active Missions</div></div>
+      <div class="stat"><div class="num">100%</div><div class="label">Youth-Led</div></div>
+      <div class="stat"><div class="num">₹0</div><div class="label">Bureaucracy Tax</div></div>
+      <div class="stat"><div class="num">1</div><div class="label">Belief — Seva Before Self</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap join-grid">
+    <div class="reveal">
+      <span class="eyebrow">Get involved</span>
+      <h2>We're onboarding volunteers, partners and advisors.</h2>
+      <p>Bring your time, your skill, or your resources. Every mission needs different hands — pick where you fit.</p>
+      <div class="roles">
+        <div class="role-chip">Ground Volunteer <span class="tag">Any city</span></div>
+        <div class="role-chip">Skill Trainer <span class="tag">Employment drive</span></div>
+        <div class="role-chip">Medical / Health Support <span class="tag">Direct aid</span></div>
+        <div class="role-chip">Road Safety Team <span class="tag">Signature project</span></div>
+        <div class="role-chip">Advisor / Partner Org <span class="tag">Policy & scale</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="card" id="volunteerForm">
+        <h3>Join as a volunteer</h3>
+        <p class="sub">Tell us who you are — we'll reach out with next steps.</p>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" placeholder="e.g. Nagpur" required>
+        </div>
+        <div class="field">
+          <label for="skill">Your skill or how you'd like to help</label>
+          <input type="text" id="skill" placeholder="e.g. Teaching, First aid, Design" required>
+        </div>
+        <div class="field">
+          <label for="phone">Mobile number</label>
+          <input type="tel" id="phone" placeholder="10-digit mobile number" required>
+        </div>
+        <button type="submit" class="submit-btn">Send My Details →</button>
+        <p class="form-note">We'll contact you within a few days. Jai Hind 🇮🇳</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand-foot">United India Youth Foundation</div>
+        <p class="desc">Youth for Change. Action for Impact. A youth-led collective serving education, employment, direct aid, scheme access and road safety across India.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#missions">Our Missions</a></li>
+          <li><a href="#road-safety">Road Safety</a></li>
+          <li><a href="#join">Volunteer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Founder: Chetan Paunikar</li>
+          <li><a href="tel:+91 7666418403">+91 7666418403</a></li>
+          <li>Nagpur, Maharashtra, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 United India Youth Foundation. Seva Before Self.</span>
+      <span>#UnitedIndiaYouthFoundation #YuvaShakti #RoadSafety</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Flip card manual toggle (pause autoplay on click)
+  const flipCard = document.getElementById('flipCard');
+  let manual = false;
+  flipCard.addEventListener('click', ()=>{
+    if(!manual){
+      flipCard.style.animation = 'none';
+      manual = true;
+    }
+    const current = flipCard.style.transform === 'rotateY(180deg)' ? 0 : 180;
+    flipCard.style.transform = `rotateY(${current}deg)`;
+  });
+
+  // Volunteer form
+  document.getElementById('volunteerForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('.submit-btn');
+    const original = btn.textContent;
+    btn.textContent = "Thank you — we'll be in touch ✓";
+    btn.style.background = '#1F6E5C';
+    btn.style.boxShadow = '0 6px 0 #123f34';
+    this.querySelectorAll('input').forEach(i=>i.disabled=true);
+  });
+</script>
+
+</body>
+</html>
